@@ -77,20 +77,26 @@ const keyboard = {
         });
 
         document.addEventListener('keyup', event => {
-            if (event.key == 'Shift' && event.altKey) {
+            if (event.key == 'Shift' && event.altKey || event.key == 'Alt' && event.shiftKey) {
                 const nextLanguage = this.language === "en" ? "ru" : "en"
                 this.language = nextLanguage
                 this._changeLanguage()
             }
         })
 
+        if (localStorage.getItem('lang')) {
+            this.language = localStorage.getItem('lang');
+            this._changeLanguage()
+        }
+
     },
 
     _changeLanguage() {
+        localStorage.setItem('lang', this.language);
         for (const key of this.elements.keys) {
             if (key.childElementCount === 0) {
                 const index = this.keyLayout.indexOf(key.dataset.key)
-                let keyValue = this._currentKeyLayout(false)[index]            
+                let keyValue = this._currentKeyLayout(false)[index]
                 key.textContent = this.properties.capsLock ? keyValue.toUpperCase() : keyValue.toLowerCase();
             }
         }
