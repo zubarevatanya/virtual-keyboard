@@ -76,6 +76,14 @@ const keyboard = {
             });
         });
 
+        document.addEventListener('keydown', event => {
+            if (!this._currentKeyLayout(event.shiftKey).some(e=>e===event.key)){
+                const nextLanguage = this.language === "en" ? "ru" : "en"
+                this.language = nextLanguage
+                this._changeLanguage()
+            }
+        })
+
         document.addEventListener('keyup', event => {
             if (event.key == 'Shift' && event.altKey || event.key == 'Alt' && event.shiftKey) {
                 const nextLanguage = this.language === "en" ? "ru" : "en"
@@ -88,7 +96,6 @@ const keyboard = {
             this.language = localStorage.getItem('lang');
             this._changeLanguage()
         }
-
     },
 
     _changeLanguage() {
@@ -280,13 +287,13 @@ const keyboard = {
 
             document.addEventListener("keydown", event => {
                 if (event.key === keyElement.textContent || event.key === key) {
-                    keyElement.classList.toggle('active')
+                    keyElement.classList.add('active')
                 }
             })
 
             document.addEventListener("keyup", event => {
                 if (event.key === keyElement.textContent || event.key === key) {
-                    keyElement.classList.toggle('active')
+                    keyElement.classList.remove('active')
                 }
             })
 
