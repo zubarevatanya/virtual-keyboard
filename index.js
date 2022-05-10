@@ -32,7 +32,7 @@ const keyboard = {
 
     ru_shiftKeyLayout: [
         'Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '-', '+', 'Backspace', '<br>',
-        'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '//', '<br>',
+        'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '/', '<br>',
         'CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter', '<br>',
         'Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', ',', 'Shift', '<br>',
         'Control', 'Alt', 'Space', 'Alt', 'Control', '<br>'
@@ -77,7 +77,7 @@ const keyboard = {
         });
 
         document.addEventListener('keydown', event => {
-            if (!this._currentKeyLayout(event.shiftKey).some(e=>e===event.key)){
+            if (!this._currentKeyLayout(event.shiftKey).some(e => e === event.key || e === event.key.toLowerCase())) {
                 const nextLanguage = this.language === "en" ? "ru" : "en"
                 this.language = nextLanguage
                 this._changeLanguage()
